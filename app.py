@@ -10,22 +10,6 @@ def index():
     return render_template("index.html")
 
 @app.route("/readcard", methods=["POST"])
-
-def get_grayscale(image):
-        return cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-
-def thresholding(image):
-    return cv2.threshold(image, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)[1]
-
-def clean(text):
-    cleanText = ""
-    cleanText = text.translate(
-            {ord(c): None for c in "_—?!=+-()[]*&%#|«»:;'‘“,"})
-    return cleanText
-
-def is_ascii(s):
-    return all(ord(c) < 128 for c in s)
-
 def readcard():
 
     corpus = []
@@ -42,6 +26,24 @@ def readcard():
     address = str
     custom_config = r'-l tha+eng --oem 3 --psm 6 -c language_model_ngram_space_delimited_language=1'
     img = cv2.imread('download.jpeg')
+
+    def get_grayscale(image):
+        return cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+
+
+    def thresholding(image):
+        return cv2.threshold(image, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)[1]
+
+
+    def clean(text):
+        cleanText = ""
+        cleanText = text.translate(
+            {ord(c): None for c in "_—?!=+-()[]*&%#|«»:;'‘“,"})
+        return cleanText
+
+
+    def is_ascii(s):
+        return all(ord(c) < 128 for c in s)
     gray = get_grayscale(img)
     thresh = thresholding(gray)
     img = thresh
