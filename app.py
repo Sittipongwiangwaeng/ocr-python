@@ -1,14 +1,16 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 import cv2
 import pytesseract
 from pytesseract import Output
-from flask import jsonify
 
 app = Flask(__name__)
 
 @app.route("/")
 def index():
     return render_template("index.html")
+
+
+@app.route("/readcard", methods=["POST"])
 
 def get_grayscale(image):
         return cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
@@ -24,8 +26,7 @@ def clean(text):
 
 def is_ascii(s):
     return all(ord(c) < 128 for c in s)
-
-@app.route("/readcard", methods=["POST"])
+    
 def readcard():
 
     corpus = []
