@@ -5,9 +5,9 @@ from pytesseract import Output
 
 app = Flask(__name__)
 
-# @app.route("/")
-# def index():
-#     return render_template("index.html")
+@app.route("/")
+def index():
+    return render_template("index.html")
 
 @app.route("/readcard", methods=["POST"])
 
@@ -252,10 +252,10 @@ def readcard():
     print("Date Of Birth:", dateOfBirth)
 
     return jsonify(
-        idcard=idCard,
-        nameth=nameTh,
-        lastnameth=lastnameTh,
-        nameeng=nameEng,
-        lastnameeng=lastnameEng,
-        dateofbirth=dateOfBirth
+        idcard="idCard",
+        nameth="nameTh",
+        lastnameth="lastnameTh",
+        nameeng="nameEng",
+        lastnameeng="lastnameEng",
+        dateofbirth="dateOfBirth"
     )
