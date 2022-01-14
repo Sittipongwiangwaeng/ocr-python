@@ -241,19 +241,19 @@ def readcard():
             checkReligion = 0
             religion = religion + strData[x]
 
-    print("ID Card:", idCard)
-    print("ชื่อตัว:", nameTh)
-    print("ชื่อสกุล:", lastnameTh)
-    print("เกิดวันที่:", dateOfBirthTh)
-    print("Name:", nameEng)
-    print("Last name:", lastnameEng)
-    print("Date Of Birth:", dateOfBirth)
+    # print("ID Card:", idCard)
+    # print("ชื่อตัว:", nameTh)
+    # print("ชื่อสกุล:", lastnameTh)
+    # print("เกิดวันที่:", dateOfBirthTh)
+    # print("Name:", nameEng)
+    # print("Last name:", lastnameEng)
+    # print("Date Of Birth:", dateOfBirth)
 
     return jsonify(
-        idcard=idCard,
-        nameth=nameTh,
-        lastnameth=lastnameTh,
-        nameeng=nameEng,
-        lastnameeng=lastnameEng,
-        dateofbirth=dateOfBirth
+        idcard="idCard",
+        nameth="nameTh",
+        lastnameth="lastnameTh",
+        nameeng="nameEng",
+        lastnameeng="lastnameEng",
+        dateofbirth="dateOfBirth"
     )
