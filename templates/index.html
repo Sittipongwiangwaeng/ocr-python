@@ -11,7 +11,7 @@
     <video id="video" width="640" height="480" autoplay></video>
     <button id="snap">Snap Photo</button>
     <canvas id="canvas" width="640" height="480"></canvas>
-
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
         // Elements for taking the snapshot
             var canvas = document.getElementById('canvas');
@@ -19,10 +19,14 @@
             var video = document.getElementById('video');
 
             // Trigger photo take
-            document.getElementById("snap").addEventListener("click", function () {
+            document.getElementById("snap").addEventListener("click",  async function () {
                 context.drawImage(video, 0, 0, 640, 480);
                 const dataURL = canvas.toDataURL("image/jpeg");
-                console.log(dataURL);
+                const response = await axios.post(`/readcard`, {
+                    raw_file: dataURL
+                });
+
+                console.log(response);
             });
 
 
