@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, jsonify
-import cv2
+# import cv2
 # import pytesseract
 # from pytesseract import Output
 
