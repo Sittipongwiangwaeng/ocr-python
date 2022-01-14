@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, jsonify
 import cv2
-import pytesseract
+# import pytesseract
 # from pytesseract import Output
 
 app = Flask(__name__)
