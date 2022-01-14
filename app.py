@@ -28,24 +28,8 @@ def readcard():
     religion = str
     address = str
     custom_config = r'-l tha+eng --oem 3 --psm 6 -c language_model_ngram_space_delimited_language=1'
-    img = cv2.imread('IMG_5583.jpg')
+    img = cv2.imread(raw_file)
 
-    def get_grayscale(image):
-        return cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-
-
-    def thresholding(image):
-        return cv2.threshold(image, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)[1]
-
-
-    def clean(text):
-        cleanText = ""
-        cleanText = text.translate({ord(c): None for c in "_—?!=+-()[]*&%#|«»:;'‘“,"})
-        return cleanText
-
-
-    def is_ascii(s):
-        return all(ord(c) < 128 for c in s)
     gray = get_grayscale(img)
     thresh = thresholding(gray)
     img = thresh
@@ -253,7 +237,7 @@ def readcard():
         "dateofbirth": "dateOfBirth"
     }
     return jsonify(response)
-    
+
     # print("ID Card:", idCard)
     # print("ชื่อตัว:", nameTh)
     # print("ชื่อสกุล:", lastnameTh)
@@ -261,3 +245,21 @@ def readcard():
     # print("Name:", nameEng)
     # print("Last name:", lastnameEng)
     # print("Date Of Birth:", dateOfBirth)
+
+
+def get_grayscale(image):
+        return cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+
+
+def thresholding(image):
+        return cv2.threshold(image, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)[1]
+
+
+def clean(text):
+        cleanText = ""
+        cleanText = text.translate({ord(c): None for c in "_—?!=+-()[]*&%#|«»:;'‘“,"})
+        return cleanText
+
+
+def is_ascii(s):
+        return all(ord(c) < 128 for c in s)
