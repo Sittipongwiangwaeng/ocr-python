@@ -1,8 +1,6 @@
 import cv2
-import re
 import pytesseract
 from pytesseract import Output
-import tesserocr
 
 corpus = []
 str = ""
@@ -19,10 +17,7 @@ address = str
 
 custom_config = r'-l tha+eng --oem 3 --psm 6 -c language_model_ngram_space_delimited_language=1'
 
-# img = cv2.imread('IMG_5542.jpg')
-# img = cv2.imread('IMG_5583.jpg')
 img = cv2.imread('download.jpeg')
-
 
 def get_grayscale(image):
     return cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
@@ -42,10 +37,8 @@ def is_ascii(s):
 gray = get_grayscale(img)
 thresh = thresholding(gray)
 img = thresh
-
 text = pytesseract.image_to_string(img, config=custom_config)
 strData = text
-
 data = pytesseract.image_to_data(img, config=custom_config, output_type=Output.DICT)
 keys = list(data.keys())
 
@@ -60,7 +53,6 @@ strData = clean(strData)
 findBD = strData.find("เกิดวันที่")
 findReligion = strData.find("ศาสนา")
 findAddress = strData.find("ที่อยู่")
-
 findID = strData.find("Identification Number")
 findIDv2 = strData.find("เลขประจําตัวประชาชน")
 findIDv3 = strData.find("เลขประจ่าตัวประชาชน")
@@ -112,7 +104,6 @@ if findNameTh != -1:
             keepName += 1
         else:
             checkNameTh = 0
-
         if keepName == 1:
             nameTh = nameTh + strData[x]
         elif keepName == 2:
@@ -240,21 +231,14 @@ for x in range(findReligion+5, findReligion+30):
         checkReligion = 0
         religion = religion + strData[x]
 
-
-print(strData)
-
-print("\n===================================\n")
 print("ID Card:", idCard)
 print("ชื่อตัว:", nameTh)
 print("ชื่อสกุล:", lastnameTh)
-# print("เกิดวันที่:", dateOfBirthTh)
+print("เกิดวันที่:", dateOfBirthTh)
 print("Name:", nameEng)
 print("Last name:", lastnameEng)
 print("Date Of Birth:", dateOfBirth)
-print("\n===================================\n")
 
-# print(tesserocr.tesseract_version())  
-# print(tesserocr.get_languages())
 
 # cv2.imshow("Image", img)
 # cv2.waitKey(0)
