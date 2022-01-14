@@ -14,6 +14,15 @@ def readcard():
 
     raw_file = request.form.get("raw_file")
     print(raw_file)
+
+    return jsonify({
+        "idcard":"idCard",
+        "nameth":"nameTh",
+        "lastnameth":"lastnameTh",
+        "nameeng":"nameEng",
+        "lastnameeng":"lastnameEng",
+        "dateofbirth":"dateOfBirth"
+    })
     # corpus = []
     # str = ""
     # strData = str
@@ -250,12 +259,3 @@ def readcard():
     # print("Name:", nameEng)
     # print("Last name:", lastnameEng)
     # print("Date Of Birth:", dateOfBirth)
-
-    return jsonify(
-        idcard="idCard",
-        nameth="nameTh",
-        lastnameth="lastnameTh",
-        nameeng="nameEng",
-        lastnameeng="lastnameEng",
-        dateofbirth="dateOfBirth"
-    )
