@@ -5,10 +5,9 @@ from pytesseract import Output
 
 app = Flask(__name__)
 
-@app.route("/")
-def index():
-    return render_template("index.html")
-
+# @app.route("/")
+# def index():
+#     return render_template("index.html")
 
 @app.route("/readcard", methods=["POST"])
 
@@ -26,7 +25,7 @@ def clean(text):
 
 def is_ascii(s):
     return all(ord(c) < 128 for c in s)
-    
+
 def readcard():
 
     corpus = []
