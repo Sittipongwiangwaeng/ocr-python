@@ -12,17 +12,18 @@ def index():
 @app.route("/readcard", methods=["POST"])
 def readcard():
 
-    raw_file = request.form.get("raw_file")
-    print(raw_file)
-
-    return jsonify({
-        "idcard":"idCard",
-        "nameth":"nameTh",
-        "lastnameth":"lastnameTh",
-        "nameeng":"nameEng",
-        "lastnameeng":"lastnameEng",
-        "dateofbirth":"dateOfBirth"
-    })
+    print(request.json)
+    raw_file = request.get_json()
+    print('raw_file, ' , raw_file)
+    response = {
+        "idcard": "idCard",
+        "nameth": "nameTh",
+        "lastnameth": "lastnameTh",
+        "nameeng": "nameEng",
+        "lastnameeng": "lastnameEng",
+        "dateofbirth": "dateOfBirth"
+    }
+    return jsonify(response)
     # corpus = []
     # str = ""
     # strData = str
