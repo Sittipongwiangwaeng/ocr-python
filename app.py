@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, jsonify
 import cv2
 import pytesseract
 from pytesseract import Output
+from PIL import Image
 
 app = Flask(__name__)
 
@@ -14,7 +15,13 @@ def readcard():
 
     raw_file = request.get_json()["raw_file"]
     print('raw file, ' , raw_file)
-    
+
+    rawData = open(raw_file, 'rb').read()
+    imgSize = (703, 1248)  # the image size
+    img = Image.frombytes('L', imgSize, rawData)
+    img.save("foo.jpg")
+    print('img, ', img)
+
     corpus = []
     str = ""
     strData = str
