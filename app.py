@@ -12,8 +12,8 @@ def index():
 @app.route("/readcard", methods=["POST"])
 def readcard():
 
-    raw_file = request.get_json().raw_file
-    print('raw_file, ' , raw_file)
+    raw_file = request.get_json()["raw_file"]
+    print('raw file, ' , raw_file)
     
     corpus = []
     str = ""
