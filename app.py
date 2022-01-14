@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, jsonify
 import cv2
-# import pytesseract
-# from pytesseract import Output
+import pytesseract
+from pytesseract import Output
 
 app = Flask(__name__)
 
@@ -9,8 +9,8 @@ app = Flask(__name__)
 def index():
     return render_template("index.html")
 
-# @app.route("/readcard", methods=["POST"])
-# def readcard():
+@app.route("/readcard", methods=["POST"])
+def readcard():
 
 #     corpus = []
 #     str = ""
@@ -249,11 +249,11 @@ def index():
 #     print("Last name:", lastnameEng)
 #     print("Date Of Birth:", dateOfBirth)
 
-#     return jsonify(
-#         idcard="idCard",
-#         nameth="nameTh",
-#         lastnameth="lastnameTh",
-#         nameeng="nameEng",
-#         lastnameeng="lastnameEng",
-#         dateofbirth="dateOfBirth"
-#     )
+    return jsonify(
+        idcard="idCard",
+        nameth="nameTh",
+        lastnameth="lastnameTh",
+        nameeng="nameEng",
+        lastnameeng="lastnameEng",
+        dateofbirth="dateOfBirth"
+    )
