@@ -41,7 +41,6 @@ text = pytesseract.image_to_string(img, config=custom_config)
 strData = text
 data = pytesseract.image_to_data(img, config=custom_config, output_type=Output.DICT)
 keys = list(data.keys())
-
 totalBox = len(data['text'])
 for i in range(totalBox):
     (x, y, w, h) = (data['left'][i], data['top'][i], data['width'][i], data['height'][i])
