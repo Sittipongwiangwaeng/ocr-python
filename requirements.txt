@@ -1,2 +1,4 @@
 opencv-python==4.5.5.62
 pycodestyle==2.8.0
+gunicorn==20.1.0
+flask==2.0.2
