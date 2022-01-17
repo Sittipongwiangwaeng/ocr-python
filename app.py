@@ -1,6 +1,8 @@
 from flask import Flask, render_template, request, jsonify
 import cv2
 import pytesseract
+import base64
+import io
 from pytesseract import Output
 from PIL import Image
 
@@ -14,27 +16,10 @@ def index():
 def readcard():
 
     raw_file = request.get_json()["raw_file"]
-    print('raw file, ' , raw_file)
-
-    # rawData = open(raw_file, 'rb').read()
-    # imgSize = (703, 1248)  # the image size
-    # img = Image.frombytes('L', imgSize, raw_file)
-    # img.save("foo.jpg")
-    # print('img, ', img)
-
-    # try:
-    #     imgSize = (703, 1248)  # the image size
-    #     img = Image.frombytes('L', imgSize, raw_file)
-    #     img.save("foo.jpg")
-    #     print('img, ', img)
-
-
-    # except OSError as exc:
-    #     if exc.errno == 36:
-    #         handle_filename_too_long()
-    #     else:
-    #         raise
-
+    b = bytes(raw_file, "utf-8")
+    z = b[b.find(b'/9'):]
+    im = Image.open(io.BytesIO(base64.b64decode(z))).save('result.jpg')
+    
     corpus = []
     str = ""
     strData = str
@@ -48,7 +33,7 @@ def readcard():
     religion = str
     address = str
     custom_config = r'-l tha+eng --oem 3 --psm 6 -c language_model_ngram_space_delimited_language=1'
-    img = cv2.imread(raw_file)
+    img = cv2.imread('result.jpg')
 
     gray = get_grayscale(img)
     thresh = thresholding(gray)
@@ -249,22 +234,25 @@ def readcard():
             religion = religion + strData[x]
 
     response = {
-        "idcard": "idCard",
-        "nameth": "nameTh",
-        "lastnameth": "lastnameTh",
-        "nameeng": "nameEng",
-        "lastnameeng": "lastnameEng",
-        "dateofbirth": "dateOfBirth"
+        "idcard": idCard,
+        "nameth": nameTh,
+        "lastnameth": lastnameTh,
+        "nameeng": nameEng,
+        "lastnameeng": lastnameEng,
+        "dateofbirth": dateOfBirth
     }
+    print(strData)
+    print(response)
+
     return jsonify(response)
 
-    # print("ID Card:", idCard)
-    # print("ชื่อตัว:", nameTh)
-    # print("ชื่อสกุล:", lastnameTh)
-    # print("เกิดวันที่:", dateOfBirthTh)
-    # print("Name:", nameEng)
-    # print("Last name:", lastnameEng)
-    # print("Date Of Birth:", dateOfBirth)
+    print("ID Card:", idCard)
+    print("ชื่อตัว:", nameTh)
+    print("ชื่อสกุล:", lastnameTh)
+    print("เกิดวันที่:", dateOfBirthTh)
+    print("Name:", nameEng)
+    print("Last name:", lastnameEng)
+    print("Date Of Birth:", dateOfBirth)
 
 
 def get_grayscale(image):
