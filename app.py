@@ -18,7 +18,7 @@ def readcard():
 
     rawData = open(raw_file, 'rb').read()
     imgSize = (703, 1248)  # the image size
-    img = Image.frombytes('L', imgSize, rawData)
+    img = Image.frombytes('L', imgSize, raw_file)
     img.save("foo.jpg")
     print('img, ', img)
 
