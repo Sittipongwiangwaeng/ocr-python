@@ -14,13 +14,26 @@ def index():
 def readcard():
 
     raw_file = request.get_json()["raw_file"]
-    # print('raw file, ' , raw_file)
+    print('raw file, ' , raw_file)
 
-    rawData = open(raw_file, 'rb').read()
-    imgSize = (703, 1248)  # the image size
-    img = Image.frombytes('L', imgSize, raw_file)
-    img.save("foo.jpg")
-    print('img, ', img)
+    # rawData = open(raw_file, 'rb').read()
+    # imgSize = (703, 1248)  # the image size
+    # img = Image.frombytes('L', imgSize, raw_file)
+    # img.save("foo.jpg")
+    # print('img, ', img)
+
+    # try:
+    #     imgSize = (703, 1248)  # the image size
+    #     img = Image.frombytes('L', imgSize, raw_file)
+    #     img.save("foo.jpg")
+    #     print('img, ', img)
+
+
+    # except OSError as exc:
+    #     if exc.errno == 36:
+    #         handle_filename_too_long()
+    #     else:
+    #         raise
 
     corpus = []
     str = ""
