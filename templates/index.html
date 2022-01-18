@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 
 <head>
@@ -11,24 +10,38 @@
     <video id="video" width="640" height="480" autoplay></video>
     <button id="snap">Snap Photo</button>
     <canvas id="canvas" width="640" height="480"></canvas>
+
+    <div>
+        <p id="idcard"></p>
+        <p id="nameeng"></p>
+        <p id="lastnameeng"></p>
+        <p id="nameth"></p>
+        <p id="lastnameth"></p>
+        <p id="dateofbirth"> </p>
+    </div>
+    
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
         // Elements for taking the snapshot
-            var canvas = document.getElementById('canvas');
-            var context = canvas.getContext('2d');
-            var video = document.getElementById('video');
+        var canvas = document.getElementById('canvas');
+        var context = canvas.getContext('2d');
+        var video = document.getElementById('video');
 
-            // Trigger photo take
-            document.getElementById("snap").addEventListener("click",  async function () {
-                context.drawImage(video, 0, 0, 640, 480);
-                const dataURL = canvas.toDataURL("image/jpeg");
-                const response = await axios.post(`/readcard`, {
-                    raw_file: dataURL
-                });
-
-                console.log(response);
+        // Trigger photo take
+        document.getElementById("snap").addEventListener("click", async function () {
+            context.drawImage(video, 0, 0, 640, 480);
+            const dataURL = canvas.toDataURL("image/jpeg");
+            const { data } = await axios.post(`/readcard`, {
+                raw_file: dataURL
             });
 
+        document.getElementById("dateofbirth").innerHTML = "Date of birth: " + data.dateofbirth;
+        document.getElementById("idcard").innerHTML = "ID card: " + data.idcard;
+        document.getElementById("lastnameeng").innerHTML = "Lastname: " + data.lastnameeng;
+        document.getElementById("lastnameth").innerHTML = "นามสกุล: " + data.lastnameth;
+        document.getElementById("nameeng").innerHTML = "Name: " + data.nameeng;
+        document.getElementById("nameth").innerHTML = "ชื่อ: " + data.nameth;
+        });
 
         // Get access to the camera!
         if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
@@ -41,6 +54,6 @@
         }
 
     </script>
-</body>
 
+</body>
 </html>

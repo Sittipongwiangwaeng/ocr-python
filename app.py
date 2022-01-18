@@ -34,6 +34,7 @@ def readcard():
     address = str
     custom_config = r'-l tha+eng --oem 3 --psm 6 -c language_model_ngram_space_delimited_language=1'
     img = cv2.imread('result.jpg')
+    # img = cv2.imread('IMG_5542.jpg')
 
     gray = get_grayscale(img)
     thresh = thresholding(gray)
@@ -242,21 +243,12 @@ def readcard():
         "dateofbirth": dateOfBirth
     }
     print(strData)
-    print(response)
-
     return jsonify(response)
 
-    print("ID Card:", idCard)
-    print("ชื่อตัว:", nameTh)
-    print("ชื่อสกุล:", lastnameTh)
-    print("เกิดวันที่:", dateOfBirthTh)
-    print("Name:", nameEng)
-    print("Last name:", lastnameEng)
-    print("Date Of Birth:", dateOfBirth)
 
 
 def get_grayscale(image):
-        return cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    return cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
 
 def thresholding(image):
